@@ -4,193 +4,220 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Consulting Assistant</title>
+
+  <!-- Google Font for a clean, modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
-    /* Reset some default styles */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9fafb;
-      color: #333;
-      margin: 0;
-      padding: 0 1rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-    header {
-      text-align: center;
-      padding: 2rem 0 1rem;
-    }
-    header h1 {
-      margin-bottom: 0.25rem;
-      font-weight: 700;
-      color: #0070f3;
-    }
-    header p.description {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 550px;
-      margin-left: auto;
-      margin-right: auto;
+    :root {
+      --primary: #6366f1;
+      --background: #f9fafb;
+      --text: #111827;
+      --muted: #6b7280;
     }
 
-    section.key-insights {
-      display: flex;
-      justify-content: space-around;
-      background: #e8f0fe;
-      border-radius: 10px;
-      padding: 1rem 1rem;
-      margin: 2rem 0;
-      gap: 1rem;
-      flex-wrap: wrap;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    section.key-insights div {
-      flex: 1 1 150px;
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 4rem 1rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    header h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem auto;
+      max-width: 900px;
+      padding: 1rem;
+    }
+
+    .features div {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      flex: 1 1 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
       text-align: center;
       font-weight: 600;
-      color: #004db3;
-      padding: 0.5rem;
-      border-radius: 6px;
-      background: #f0f5ff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: var(--primary);
     }
 
     form {
       background: white;
+      max-width: 600px;
+      margin: 3rem auto;
       padding: 2rem;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
-    label {
+
+    form label {
       display: block;
-      margin-bottom: 0.5rem;
       font-weight: 600;
-      color: #222;
+      margin-bottom: 0.5rem;
+      color: var(--text);
     }
-    input, textarea {
+
+    form input, form textarea {
       width: 100%;
-      padding: 0.6rem;
-      margin-bottom: 1.2rem;
-      border: 1.8px solid #ccc;
+      padding: 0.75rem;
+      border: 1.5px solid #ddd;
       border-radius: 6px;
+      margin-bottom: 1.5rem;
       font-size: 1rem;
-      transition: border-color 0.3s;
     }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #0070f3;
-      box-shadow: 0 0 5px #0070f3aa;
-    }
-    button {
-      background-color: #0070f3;
-      border: none;
+
+    form button {
+      background: var(--primary);
       color: white;
-      font-weight: 700;
       font-size: 1.1rem;
-      padding: 0.75rem 1.5rem;
+      padding: 0.9rem 1.5rem;
+      border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background-color 0.3s;
       width: 100%;
+      font-weight: 600;
+      transition: background 0.3s;
     }
-    button:hover {
-      background-color: #005bb5;
+
+    form button:hover {
+      background: #4f46e5;
     }
 
     #advice {
-      background: #f0f5ff;
-      border-left: 5px solid #0070f3;
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #eef2ff;
+      border-left: 4px solid var(--primary);
       padding: 1.5rem;
       border-radius: 8px;
-      margin-top: 2rem;
-      white-space: pre-wrap;
       font-size: 1rem;
-      color: #004db3;
+      color: #1e3a8a;
       display: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+      white-space: pre-wrap;
     }
 
-    @media (max-width: 500px) {
-      section.key-insights {
-        flex-direction: column;
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
       }
-      section.key-insights div {
-        flex: none;
-        margin-bottom: 1rem;
+
+      .features {
+        flex-direction: column;
       }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>AI Consulting Assistant</h1>
-  <p class="description">
-    Get fast, tailored business advice in under 60 seconds.  
-    Secure, private, and free during this testing phase.  
-    Perfect for small business owners looking to improve marketing, operations, hiring, and more.
-  </p>
-</header>
+  <header>
+    <h1>AI Consulting Assistant</h1>
+    <p>
+      Instantly get tailored business advice using AI. Perfect for startups and small businesses looking to grow smarter, faster.
+    </p>
+  </header>
 
-<section class="key-insights">
-  <div>⏱ &nbsp; &lt; 60 seconds</div>
-  <div>🔒 &nbsp; Secure & Private</div>
-  <div>💸 &nbsp; Free during testing</div>
-</section>
+  <section class="features">
+    <div>⚡ &nbsp; Under 60 seconds</div>
+    <div>🔐 &nbsp; Secure & Private</div>
+    <div>🧠 &nbsp; AI-Powered</div>
+    <div>💸 &nbsp; Free During Beta</div>
+  </section>
 
-<form id="consultForm" autocomplete="off" spellcheck="false" novalidate>
-  <label for="industry">Industry</label>
-  <input type="text" id="industry" placeholder="E.g. Retail, Tech" required />
+  <form id="consultForm" autocomplete="off" spellcheck="false">
+    <label for="industry">Industry</label>
+    <input type="text" id="industry" placeholder="e.g. Tech, Retail" required />
 
-  <label for="size">Business Size</label>
-  <input type="text" id="size" placeholder="E.g. 10 employees" required />
+    <label for="size">Business Size</label>
+    <input type="text" id="size" placeholder="e.g. 10 employees" required />
 
-  <label for="goals">Goals</label>
-  <input type="text" id="goals" placeholder="E.g. Increase sales, grow brand" required />
+    <label for="goals">Your Goals</label>
+    <input type="text" id="goals" placeholder="e.g. Increase sales" required />
 
-  <label for="struggles">What are you struggling with?</label>
-  <textarea id="struggles" rows="4" placeholder="E.g. Marketing strategy, hiring" required></textarea>
+    <label for="struggles">What are you struggling with?</label>
+    <textarea id="struggles" rows="4" placeholder="e.g. Marketing, hiring, operations" required></textarea>
 
-  <button type="submit">Get Advice</button>
-</form>
+    <button type="submit">Get AI Advice</button>
+  </form>
 
-<div id="advice"></div>
+  <div id="advice"></div>
 
-<script>
-  document.getElementById('consultForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+  <footer>
+    &copy; 2025 AI Consulting Assistant. Built for entrepreneurs and dreamers.
+  </footer>
 
-    const industry = document.getElementById('industry').value.trim();
-    const size = document.getElementById('size').value.trim();
-    const goals = document.getElementById('goals').value.trim();
-    const struggles = document.getElementById('struggles').value.trim();
+  <script>
+    document.getElementById('consultForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
 
-    const adviceDiv = document.getElementById('advice');
-    adviceDiv.style.display = 'block';
-    adviceDiv.textContent = 'Getting your tailored advice... ⏳';
+      const industry = document.getElementById('industry').value.trim();
+      const size = document.getElementById('size').value.trim();
+      const goals = document.getElementById('goals').value.trim();
+      const struggles = document.getElementById('struggles').value.trim();
 
-    try {
-      const response = await fetch('https://eo6poy42m0zbb4f.m.pipedream.net', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ industry, size, goals, struggles })
-      });
+      const adviceDiv = document.getElementById('advice');
+      adviceDiv.style.display = 'block';
+      adviceDiv.textContent = 'Thinking...';
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
+      try {
+        const response = await fetch('https://https://eo6poy42m0zbb4f.m.pipedream.net', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            industry,
+            size,
+            goals,
+            struggles
+          })
+        });
+
+        const data = await response.json();
+        adviceDiv.textContent = data.advice || data.result || 'Sorry, no advice returned.';
+      } catch (error) {
+        adviceDiv.textContent = 'Something went wrong. Please try again later.';
+        console.error(error);
       }
-
-      const data = await response.json();
-
-      adviceDiv.textContent = data.advice || "Sorry, no advice received.";
-    } catch (error) {
-      adviceDiv.textContent = 'Error fetching advice: ' + error.message;
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
