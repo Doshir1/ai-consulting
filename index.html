@@ -1,29 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AI Consulting Assistant (Frontend Only)</title>
-<style>
-  body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
-  label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-  input, textarea { width: 100%; padding: 0.5rem; margin-bottom: 1rem; font-size: 1rem; }
-  button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
-  #advice { background: #f9f9f9; padding: 1rem; border-radius: 5px; margin-top: 2rem; white-space: pre-wrap; display:none; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Consulting Assistant</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9fafb;
+      color: #333;
+      margin: 0;
+      padding: 0 1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 0 1rem;
+    }
+    header h1 {
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+      color: #0070f3;
+    }
+    header p.description {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    section.key-insights {
+      display: flex;
+      justify-content: space-around;
+      background: #e8f0fe;
+      border-radius: 10px;
+      padding: 1rem 1rem;
+      margin: 2rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    section.key-insights div {
+      flex: 1 1 150px;
+      text-align: center;
+      font-weight: 600;
+      color: #004db3;
+      padding: 0.5rem;
+      border-radius: 6px;
+      background: #f0f5ff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #222;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1.2rem;
+      border: 1.8px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #0070f3;
+      box-shadow: 0 0 5px #0070f3aa;
+    }
+    button {
+      background-color: #0070f3;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+
+    #advice {
+      background: #f0f5ff;
+      border-left: 5px solid #0070f3;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      color: #004db3;
+      display: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    @media (max-width: 500px) {
+      section.key-insights {
+        flex-direction: column;
+      }
+      section.key-insights div {
+        flex: none;
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h1>AI Consulting Assistant (Frontend Only)</h1>
+<header>
+  <h1>AI Consulting Assistant</h1>
+  <p class="description">
+    Get fast, tailored business advice in under 60 seconds.  
+    Secure, private, and free during this testing phase.  
+    Perfect for small business owners looking to improve marketing, operations, hiring, and more.
+  </p>
+</header>
 
-<form id="consultForm">
-  <label for="industry">Industry:</label>
+<section class="key-insights">
+  <div>⏱ &nbsp; &lt; 60 seconds</div>
+  <div>🔒 &nbsp; Secure & Private</div>
+  <div>💸 &nbsp; Free during testing</div>
+</section>
+
+<form id="consultForm" autocomplete="off" spellcheck="false" novalidate>
+  <label for="industry">Industry</label>
   <input type="text" id="industry" placeholder="E.g. Retail, Tech" required />
 
-  <label for="size">Business Size:</label>
+  <label for="size">Business Size</label>
   <input type="text" id="size" placeholder="E.g. 10 employees" required />
 
-  <label for="goals">Goals:</label>
+  <label for="goals">Goals</label>
   <input type="text" id="goals" placeholder="E.g. Increase sales, grow brand" required />
 
   <label for="struggles">What are you struggling with?</label>
@@ -53,7 +178,7 @@
     if (struggles.toLowerCase().includes('operations')) {
       advice += "- Streamline your processes with simple project management tools.\n";
     }
-    if (advice === '') {
+    if (!struggles.toLowerCase().includes('marketing') && !struggles.toLowerCase().includes('hiring') && !struggles.toLowerCase().includes('operations')) {
       advice += "- Keep tracking your key performance indicators and adjust strategies accordingly.\n";
     }
 
