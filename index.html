@@ -160,44 +160,37 @@
 <div id="advice"></div>
 
 <script>
-  document.getElementById('consultForm').addEventListener('submit', function(e) {
+  document.getElementById('consultForm').addEventListener('submit', async function(e) {
     e.preventDefault();
+
     const industry = document.getElementById('industry').value.trim();
     const size = document.getElementById('size').value.trim();
     const goals = document.getElementById('goals').value.trim();
     const struggles = document.getElementById('struggles').value.trim();
 
-    let advice = `Thanks for your submission!\n\nIndustry: ${industry}\nSize: ${size}\nGoals: ${goals}\nStruggles: ${struggles}\n\nHere's some advice based on your struggles:\n\n`;
-
-    if (struggles.toLowerCase().includes('marketing')) {
-      advice += "- Try social media campaigns tailored to your target customers.\n";
-    }
-    if (struggles.toLowerCase().includes('hiring')) {
-      advice += "- Consider employee referral programs and local job boards.\n";
-    }
-    if (struggles.toLowerCase().includes('operations')) {
-      advice += "- Streamline your processes with simple project management tools.\n";
-    }
-    if (!struggles.toLowerCase().includes('marketing') && !struggles.toLowerCase().includes('hiring') && !struggles.toLowerCase().includes('operations')) {
-      advice += "- Keep tracking your key performance indicators and adjust strategies accordingly.\n";
-    }
-
     const adviceDiv = document.getElementById('advice');
-    adviceDiv.textContent = advice;
     adviceDiv.style.display = 'block';
+    adviceDiv.textContent = 'Getting your tailored advice... ⏳';
+
+    try {
+      const response = await fetch('https://eo6poy42m0zbb4f.m.pipedream.net', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ industry, size, goals, struggles })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      adviceDiv.textContent = data.advice || "Sorry, no advice received.";
+    } catch (error) {
+      adviceDiv.textContent = 'Error fetching advice: ' + error.message;
+    }
   });
 </script>
 
 </body>
 </html>
-<form id="businessForm">
-  <label for="situation">Describe your business situation:</label><br>
-  <textarea id="situation" name="situation" rows="3" required></textarea><br><br>
-
-  <label for="struggles">What are you struggling with?</label><br>
-  <textarea id="struggles" name="struggles" rows="3" required></textarea><br><br>
-
-  <button type="submit">Get Advice</button>
-</form>
-
-<div id="response" style="margin-top:20px; white-space: pre-wrap;"></div>
