@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Consulting Assistant (Frontend Only)</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+  label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+  input, textarea { width: 100%; padding: 0.5rem; margin-bottom: 1rem; font-size: 1rem; }
+  button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+  #advice { background: #f9f9f9; padding: 1rem; border-radius: 5px; margin-top: 2rem; white-space: pre-wrap; display:none; }
+</style>
+</head>
+<body>
+
+<h1>AI Consulting Assistant (Frontend Only)</h1>
+
+<form id="consultForm">
+  <label for="industry">Industry:</label>
+  <input type="text" id="industry" placeholder="E.g. Retail, Tech" required />
+
+  <label for="size">Business Size:</label>
+  <input type="text" id="size" placeholder="E.g. 10 employees" required />
+
+  <label for="goals">Goals:</label>
+  <input type="text" id="goals" placeholder="E.g. Increase sales, grow brand" required />
+
+  <label for="struggles">What are you struggling with?</label>
+  <textarea id="struggles" rows="4" placeholder="E.g. Marketing strategy, hiring" required></textarea>
+
+  <button type="submit">Get Advice</button>
+</form>
+
+<div id="advice"></div>
+
+<script>
+  document.getElementById('consultForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const industry = document.getElementById('industry').value.trim();
+    const size = document.getElementById('size').value.trim();
+    const goals = document.getElementById('goals').value.trim();
+    const struggles = document.getElementById('struggles').value.trim();
+
+    let advice = `Thanks for your submission!\n\nIndustry: ${industry}\nSize: ${size}\nGoals: ${goals}\nStruggles: ${struggles}\n\nHere's some advice based on your struggles:\n\n`;
+
+    if (struggles.toLowerCase().includes('marketing')) {
+      advice += "- Try social media campaigns tailored to your target customers.\n";
+    }
+    if (struggles.toLowerCase().includes('hiring')) {
+      advice += "- Consider employee referral programs and local job boards.\n";
+    }
+    if (struggles.toLowerCase().includes('operations')) {
+      advice += "- Streamline your processes with simple project management tools.\n";
+    }
+    if (advice === '') {
+      advice += "- Keep tracking your key performance indicators and adjust strategies accordingly.\n";
+    }
+
+    const adviceDiv = document.getElementById('advice');
+    adviceDiv.textContent = advice;
+    adviceDiv.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
