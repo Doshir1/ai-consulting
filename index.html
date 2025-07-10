@@ -1,80 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Consulting Assistant</title>
+  <title>ConsultAI - Smart Business Advisor</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(145deg, #e3f2fd, #f8f9fa);
-      color: #1a1a1a;
-      padding: 2rem;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      backdrop-filter: blur(20px);
+      height: 100vh;
+      padding: 20px;
     }
 
-    header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    header h1 {
+    h1 {
       font-size: 2.8rem;
-      font-weight: 700;
-      background: linear-gradient(to right, #0070f3, #00c6ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
     }
 
-    header p {
+    p {
       font-size: 1.1rem;
-      color: #444;
-      max-width: 600px;
-      margin: 1rem auto 0;
+      margin-bottom: 30px;
+      text-align: center;
+      max-width: 700px;
     }
 
     form {
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 16px;
-      padding: 2rem;
-      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 30px;
       width: 100%;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(15px);
+      max-width: 600px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
     }
 
     label {
-      font-weight: 600;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 8px;
+      font-weight: 600;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 12px;
       font-size: 1rem;
-      background: #fff;
-      transition: border-color 0.3s;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #0070f3;
-      outline: none;
-      box-shadow: 0 0 8px rgba(0, 112, 243, 0.2);
     }
 
     select[multiple] {
@@ -82,104 +69,99 @@
     }
 
     button {
-      background: linear-gradient(135deg, #0070f3, #00c6ff);
-      color: white;
-      font-weight: 700;
-      border: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      cursor: pointer;
       width: 100%;
+      padding: 14px;
+      background: #00c6ff;
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
       transition: background 0.3s;
     }
 
     button:hover {
-      background: linear-gradient(135deg, #005bb5, #009ee0);
+      background: linear-gradient(to right, #005bea, #00c6ff);
     }
 
-    #advice {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      background: rgba(240, 245, 255, 0.8);
-      border-left: 6px solid #0070f3;
-      border-radius: 12px;
-      white-space: pre-wrap;
-      display: none;
-      font-size: 1rem;
-      color: #003b8b;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    .response {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>AI Consulting Assistant</h1>
-    <p>Get intelligent, instant and tailored business advice powered by AI. Secure. Fast. Free during beta.</p>
-  </header>
+  <h1>ConsultAI</h1>
+  <p>Your AI-powered business advisor — get personalised strategic advice in seconds.</p>
 
   <form id="consultForm">
     <label for="industry">Industry</label>
-    <input type="text" id="industry" placeholder="E.g. Fashion, Tech, Services" required>
+    <input type="text" id="industry" name="industry" required />
 
     <label for="size">Business Size</label>
-    <input type="text" id="size" placeholder="E.g. 3 employees, 1 founder" required>
-
-    <label for="goals">Goals (Select all that apply)</label>
-    <select id="goals" multiple required>
-      <option value="Increase sales">Increase sales</option>
-      <option value="Grow online presence">Grow online presence</option>
-      <option value="Improve operations">Improve operations</option>
-      <option value="Hire better">Hire better</option>
-      <option value="Customer satisfaction">Customer satisfaction</option>
-      <option value="Funding">Get funding</option>
+    <select id="size" name="size" required>
+      <option value="">Select...</option>
+      <option value="Solo entrepreneur">Solo entrepreneur</option>
+      <option value="Small team (2–10)">Small team (2–10)</option>
+      <option value="Medium-sized business (11–50)">Medium-sized business (11–50)</option>
+      <option value="Large business (50+)">Large business (50+)</option>
     </select>
 
-    <label for="struggles">What are you struggling with?</label>
-    <textarea id="struggles" placeholder="Briefly describe your main struggles..." rows="4" required></textarea>
+    <label for="goals">Goals (select multiple if needed)</label>
+    <select id="goals" name="goals" multiple required>
+      <option value="Grow customer base">Grow customer base</option>
+      <option value="Improve marketing">Improve marketing</option>
+      <option value="Increase revenue">Increase revenue</option>
+      <option value="Reduce costs">Reduce costs</option>
+      <option value="Expand to new markets">Expand to new markets</option>
+      <option value="Streamline operations">Streamline operations</option>
+    </select>
 
-    <button type="submit">Get My Advice 🚀</button>
+    <label for="struggles">Biggest Challenges</label>
+    <textarea id="struggles" name="struggles" rows="4" required></textarea>
+
+    <button type="submit">Get Advice</button>
   </form>
 
-  <div id="advice"></div>
+  <div class="response" id="advice"></div>
 
   <script>
-    const form = document.getElementById('consultForm');
-    const adviceDiv = document.getElementById('advice');
+    const form = document.getElementById("consultForm");
+    const adviceDiv = document.getElementById("advice");
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const industry = document.getElementById('industry').value.trim();
-      const size = document.getElementById('size').value.trim();
-      const goalsSelect = document.getElementById('goals');
-      const goals = Array.from(goalsSelect.selectedOptions).map(opt => opt.value);
-      const struggles = document.getElementById('struggles').value.trim();
+      const industry = document.getElementById("industry").value;
+      const size = document.getElementById("size").value;
+      const goals = Array.from(document.getElementById("goals").selectedOptions).map(option => option.value);
+      const struggles = document.getElementById("struggles").value;
 
-      const payload = {
-        industry,
-        size,
-        goals,
-        struggles
-      };
-
-      adviceDiv.style.display = 'block';
-      adviceDiv.textContent = 'Thinking... 🤖';
+      adviceDiv.textContent = "Thinking...";
 
       try {
-        const response = await fetch('https://eo4ph2vzs474xw2.m.pipedream.net', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+        const response = await fetch("https://eo4ph2vzs474xw2.m.pipedream.net", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ industry, size, goals, struggles })
         });
 
         const data = await response.json();
-        adviceDiv.textContent = data.advice || 'Sorry, something went wrong.';
+        adviceDiv.textContent = data.advice || "Sorry, I couldn't fetch the advice.";
       } catch (error) {
         console.error(error);
-        adviceDiv.textContent = 'There was a problem connecting to the AI assistant.';
+        adviceDiv.textContent = "There was a problem connecting to the AI assistant.";
       }
     });
   </script>
 </body>
+
 </html>
