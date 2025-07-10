@@ -3,241 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Business Advisor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>AI Consulting Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: #f9fafc;
+      background: linear-gradient(145deg, #e3f2fd, #f8f9fa);
       color: #1a1a1a;
-      line-height: 1.6;
-    }
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #eee;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-    }
-    header h1 {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: #0070f3;
-    }
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #222;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: #555;
-      margin-top: 0.5rem;
-    }
-    .features {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-    .features div {
-      flex: 1 1 30%;
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-      text-align: center;
-      font-weight: 600;
-      color: #004db3;
-    }
-    form {
-      background: white;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: blur(20px);
     }
-    section {
+
+    header {
+      text-align: center;
       margin-bottom: 2rem;
     }
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-weight: 600;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 0.65rem;
-      margin-bottom: 1.2rem;
-      border: 1.5px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    .choices {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .choice {
-      flex: 1 1 45%;
-      background: #f0f4ff;
-      border: 2px solid transparent;
-      padding: 0.75rem;
-      text-align: center;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .choice:hover, .choice.selected {
-      border-color: #0070f3;
-      background: #e4eeff;
-    }
-    button {
-      background-color: #0070f3;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1.1rem;
+
+    header h1 {
+      font-size: 2.8rem;
       font-weight: 700;
-      border-radius: 8px;
+      background: linear-gradient(to right, #0070f3, #00c6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #444;
+      max-width: 600px;
+      margin: 1rem auto 0;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(15px);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #fff;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #0070f3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(0, 112, 243, 0.2);
+    }
+
+    select[multiple] {
+      height: 120px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #0070f3, #00c6ff);
+      color: white;
+      font-weight: 700;
+      border: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
       cursor: pointer;
       width: 100%;
+      transition: background 0.3s;
     }
+
     button:hover {
-      background-color: #005bb5;
+      background: linear-gradient(135deg, #005bb5, #009ee0);
     }
+
     #advice {
-      display: none;
       margin-top: 2rem;
-      background: #f4f8ff;
       padding: 1.5rem;
-      border-left: 4px solid #0070f3;
-      border-radius: 8px;
+      background: rgba(240, 245, 255, 0.8);
+      border-left: 6px solid #0070f3;
+      border-radius: 12px;
       white-space: pre-wrap;
-      color: #003a8c;
-      font-weight: 500;
-    }
-    #loading {
       display: none;
-      font-style: italic;
-      color: #666;
-      margin-top: 1rem;
+      font-size: 1rem;
+      color: #003b8b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>AI Business Advisor</h1>
+    <h1>AI Consulting Assistant</h1>
+    <p>Get intelligent, instant and tailored business advice powered by AI. Secure. Fast. Free during beta.</p>
   </header>
 
-  <main>
-    <div class="hero">
-      <h2>Business insights in under 60 seconds</h2>
-      <p>Instant, private, AI-driven advice for small businesses — free while we test!</p>
-    </div>
+  <form id="consultForm">
+    <label for="industry">Industry</label>
+    <input type="text" id="industry" placeholder="E.g. Fashion, Tech, Services" required>
 
-    <div class="features">
-      <div>⚡ Under 60 seconds</div>
-      <div>🔒 Secure & Private</div>
-      <div>💸 Free during testing</div>
-    </div>
+    <label for="size">Business Size</label>
+    <input type="text" id="size" placeholder="E.g. 3 employees, 1 founder" required>
 
-    <form id="consultForm">
-      <section>
-        <h3>1. Tell us about your business</h3>
-        <label for="bizName">Business Name</label>
-        <input type="text" id="bizName" required />
+    <label for="goals">Goals (Select all that apply)</label>
+    <select id="goals" multiple required>
+      <option value="Increase sales">Increase sales</option>
+      <option value="Grow online presence">Grow online presence</option>
+      <option value="Improve operations">Improve operations</option>
+      <option value="Hire better">Hire better</option>
+      <option value="Customer satisfaction">Customer satisfaction</option>
+      <option value="Funding">Get funding</option>
+    </select>
 
-        <label for="industry">Industry</label>
-        <input type="text" id="industry" required />
+    <label for="struggles">What are you struggling with?</label>
+    <textarea id="struggles" placeholder="Briefly describe your main struggles..." rows="4" required></textarea>
 
-        <label for="size">Business Size</label>
-        <div class="choices" id="sizeChoices">
-          <div class="choice" data-value="Solo">Solo</div>
-          <div class="choice" data-value="Small Team">Small Team</div>
-          <div class="choice" data-value="Growing Business">Growing Business</div>
-          <div class="choice" data-value="Established">Established</div>
-        </div>
-      </section>
+    <button type="submit">Get My Advice 🚀</button>
+  </form>
 
-      <section>
-        <h3>2. Goals and Struggles</h3>
-        <label for="goals">Goals (Select up to 3)</label>
-        <select id="goals" multiple size="5">
-          <option value="Increase sales">Increase sales</option>
-          <option value="Grow brand">Grow brand</option>
-          <option value="Hire better">Hire better</option>
-          <option value="Improve operations">Improve operations</option>
-          <option value="Launch new product">Launch new product</option>
-        </select>
-
-        <label for="struggles">Current Challenges</label>
-        <textarea id="struggles" rows="4" placeholder="E.g. Marketing, hiring, cashflow..." required></textarea>
-      </section>
-
-      <button type="submit">Get My AI Advice</button>
-      <div id="loading">Thinking... Please wait.</div>
-    </form>
-
-    <div id="advice"></div>
-  </main>
+  <div id="advice"></div>
 
   <script>
-    let selectedSize = '';
-    document.querySelectorAll('.choice').forEach(choice => {
-      choice.addEventListener('click', () => {
-        document.querySelectorAll('.choice').forEach(c => c.classList.remove('selected'));
-        choice.classList.add('selected');
-        selectedSize = choice.dataset.value;
-      });
-    });
+    const form = document.getElementById('consultForm');
+    const adviceDiv = document.getElementById('advice');
 
-    document.getElementById('consultForm').addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('bizName').value.trim();
+
       const industry = document.getElementById('industry').value.trim();
+      const size = document.getElementById('size').value.trim();
+      const goalsSelect = document.getElementById('goals');
+      const goals = Array.from(goalsSelect.selectedOptions).map(opt => opt.value);
       const struggles = document.getElementById('struggles').value.trim();
-      const goals = Array.from(document.getElementById('goals').selectedOptions).map(o => o.value);
 
-      if (!selectedSize) return alert("Please select a business size.");
+      const payload = {
+        industry,
+        size,
+        goals,
+        struggles
+      };
 
-      const loading = document.getElementById('loading');
-      const adviceDiv = document.getElementById('advice');
-      loading.style.display = 'block';
-      adviceDiv.style.display = 'none';
-
-      const response = await fetch('https://https://eo6poy42m0zbb4f.m.pipedream.net', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          bizName: name,
-          industry,
-          size: selectedSize,
-          goals,
-          struggles
-        })
-      });
-
-      const data = await response.json();
-      adviceDiv.textContent = data.advice || "Sorry, something went wrong.";
       adviceDiv.style.display = 'block';
-      loading.style.display = 'none';
+      adviceDiv.textContent = 'Thinking... 🤖';
+
+      try {
+        const response = await fetch('https://eo4ph2vzs474xw2.m.pipedream.net', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        adviceDiv.textContent = data.advice || 'Sorry, something went wrong.';
+      } catch (error) {
+        console.error(error);
+        adviceDiv.textContent = 'There was a problem connecting to the AI assistant.';
+      }
     });
   </script>
 </body>
